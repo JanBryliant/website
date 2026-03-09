@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <link rel="preload" as="image" href="https://i.imgur.com/a8ZYWLG.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anna Bryliant • Graphic Designer</title>
+  <meta name="description" content="Portfolio of Anna Bryliant — branding, packaging, visual storytelling"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Arapey:ital@1&family=Lato:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    /* --- VARIABLES --- */
+    /* --- VARIABLES & COLORS --- */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-color: #1E2749;       /* Midnight Navy */
+      --text-color: #FAFAFA;     /* Soft White */
+      --primary: #E6DFFF;        /* Light Lavender */
+      --secondary: #273469;      /* Deep Navy Blue */
+      --accent: #FAFAFA;
+      --border: rgba(250, 250, 250, 0.15);
+      --glass: rgba(30, 39, 73, 0.75);
+      --card-bg: rgba(39, 52, 105, 0.4);
+      --radius: 0.75rem;
+    }
+
+    /* Light Theme - Теперь строго по списку заказчика */
+    body.light {
+      --bg-color: #FAFAFA;       /* Soft White (вместо FFFFFF) */
+      --text-color: #2E3440;     /* Dark Charcoal */
+      --primary: #273469;        /* Deep Navy Blue */
+      --secondary: #E6DFFF;      /* Light Lavender (вместо F0F0F0) */
+      --accent: #1E2749;         /* Midnight Navy */
+      --border: rgba(46, 52, 64, 0.1);
+      --glass: rgba(250, 250, 250, 0.9); 
+      --card-bg: rgba(255, 255, 255, 0.5);
+    }
+
+    /* --- TYPOGRAPHY (STRICT) --- */
+    body {
+      font-family: 'Nanum Myeongjo', serif; /* Основной текст */
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    h1, h2, h3 { 
+      font-family: 'Italiana', serif; /* Заголовки */
+    }
+    
+    .logo, .font-subtitle { 
+      font-family: 'Arapey', serif; 
+      font-style: italic; /* Arapey Italic */
+    }
+    
+    .font-label, button, .nav-links button, .btn { 
+      font-family: 'Lato', sans-serif; 
+      font-weight: 400; /* Lato Regular */
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* --- LAYOUT UTILITIES --- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-padding { padding: 8rem 0; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .gap-2 { gap: 0.5rem; }
+    
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 80px;
+      display: flex; align-items: center;
+      background: var(--glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    
+    .logo { 
+      font-family: 'Arapey', serif; font-style: italic; font-size: 1.5rem; 
+      cursor: pointer; color: var(--text-color); text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    /* Группировка правой части */
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    
+    .nav-links.desktop { display: flex; gap: 2rem; align-items: center; margin-right: 1rem; }
+    
+    .nav-links button.nav-item { 
+      background: none; border: none; cursor: pointer; 
+      color: var(--text-color); opacity: 0.7; transition: 0.3s;
+    }
+    .nav-links button.nav-item:hover { opacity: 1; }
+
+    /* Контейнер кнопок (всегда виден) */
+    .nav-controls { display: flex; gap: 0.5rem; align-items: center; }
+
+    /* --- Кнопки переключения (Язык и Тема) --- */
+    /* --- Кнопки переключения (как на картинке) --- */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      
+      background-color: var(--secondary); /* Тёмно-синий фон */
+      border: none;                       /* УБРАЛИ ОБВОДКУ */
+      border-radius: 12px;                /* ЧУТЬ КВАДРАТНЕЕ (вместо 30px) */
+      
+      color: var(--text-color);
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    /* Ховер: заливка становится фиолетовой, текст темным */
+    .toggle-btn:hover {
+      background-color: #E6DFFF;          /* Фиолетовый (Light Lavender) */
+      color: #1E2749;                     /* Темный текст для контраста */
+      transform: translateY(-1px);
+    }
+
+    .toggle-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 1.8px;
+    }
+    .toggle-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .toggle-btn svg { width: 16px; height: 16px; stroke: currentColor; }
+
+    .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links.desktop { display: none; } /* Прячем только текстовые ссылки */
+      .mobile-toggle { display: block; }    /* Показываем бутерброд */
+      .nav-right { gap: 0.5rem; }            /* Сужаем отступы на мобилке */
+      .toggle-btn span { font-size: 0.7rem; } /* Уменьшаем текст EN/PL */
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-color: var(--bg-color); 
+    }
+    
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://i.imgur.com/a8ZYWLG.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0; 
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: var(--bg-color); 
+      opacity: 0.7;  /* ИЗМЕНЕНО: БЫЛО 0.9. ТЕПЕРЬ КАРТИНКА ВИДНА ЛУЧШЕ */
+      z-index: 1;
+      transition: background-color 0.5s ease, opacity 0.5s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none;
+      font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.9rem;
+      transition: 0.3s; cursor: pointer; display: inline-block; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--primary); color: var(--bg-color); }
+    .btn-outline { background: transparent; color: var(--text-color); border-color: var(--text-color); }
+    .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* --- CARDS & GRID --- */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      border-color: var(--primary);
+    }
+
+    /* --- GALLERY --- */
+    .gallery-container {
+      position: relative;
+      height: 500px;
+      display: flex; justify-content: center; align-items: center;
+      perspective: 1000px;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: absolute;
+      width: 320px; height: 450px;
+      background: #eee;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      cursor: pointer;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .gallery-item.active { 
+      transform: translateZ(100px) scale(1); 
+      z-index: 10; opacity: 1; pointer-events: auto;
+    }
+    .gallery-item.prev { 
+      transform: translateX(-280px) scale(0.85) rotateY(15deg); 
+      z-index: 5; opacity: 0.7; filter: brightness(0.7); 
+    }
+    .gallery-item.next { 
+      transform: translateX(280px) scale(0.85) rotateY(-15deg); 
+      z-index: 5; opacity: 0.7; filter: brightness(0.7); 
+    }
+    .gallery-item.hidden { 
+      opacity: 0; transform: scale(0.5); pointer-events: none; z-index: 0;
+    }
+
+    /* --- CONTACT --- */
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--text-color);
+      padding: 1.5rem; border: 1px solid var(--border); border-radius: 1rem;
+      transition: 0.3s;
+    }
+    .contact-item:hover { background: var(--secondary); border-color: var(--secondary); }
+
+    /* --- MOBILE RESPONSIVE --- */
+    #mobileMenu {
+      position: fixed; inset: 0; background: var(--bg-color); z-index: 999;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+      transform: translateY(-100%); transition: transform 0.4s ease;
+    }
+    #mobileMenu.open { transform: translateY(0); }
+    
+    @media (max-width: 768px) {
+      .nav-links.desktop { display: none; }
+      .mobile-toggle { display: block; }
+      .gallery-container { height: 400px; }
+      .gallery-item { width: 260px; height: 360px; }
+      .gallery-item.prev { transform: translateX(-60px) scale(0.85) rotateY(5deg); opacity: 0.5; z-index: 4;}
+      .gallery-item.next { transform: translateX(60px) scale(0.85) rotateY(-5deg); opacity: 0.5; z-index: 4;}
+      .hero h1 { font-size: 3.5rem; }
+    }
+    
+    @media (min-width: 769px) {
+      .mobile-toggle { display: none; }
+    }
+  </style>
+</head>
+<body class="dark"> 
+  <nav>
+  <div class="container nav-inner">
+    <a onclick="scrollToId('hero')" class="logo">Anna Bryliant</a>
+    
+    <div class="nav-right">
+      <div class="nav-links desktop">
+        <button onclick="scrollToId('about')" class="nav-item" data-i18n="nav_about">About</button>
+        <button onclick="scrollToId('skills')" class="nav-item" data-i18n="nav_skills">Skills</button>
+        <button onclick="scrollToId('gallery')" class="nav-item" data-i18n="nav_gallery">Gallery</button>
+        <button onclick="scrollToId('contact')" class="nav-item" data-i18n="nav_contact">Contact</button>
+      </div>
+
+      <div class="nav-controls">
+        <button onclick="toggleLang()" class="toggle-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"></path></svg>
+          <span id="langLabel">EN</span>
+        </button>
+        <button onclick="toggleTheme()" class="toggle-btn">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        </button>
+      </div>
+
+      <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div id="mobileMenu">
+  <button onclick="scrollToId('about'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_about">About</button>
+  <button onclick="scrollToId('skills'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_skills">Skills</button>
+  <button onclick="scrollToId('gallery'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_gallery">Gallery</button>
+  <button onclick="scrollToId('contact'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_contact">Contact</button>
+  
+  <button onclick="toggleMobileMenu()" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:2rem; color:var(--text-color);">✕</button>
+</div>
+
+<header id="hero" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  
+  <div class="container reveal active" style="z-index: 10;">
+    <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="hero_role">Graphic Designer & Visual Storyteller</p>
+    <h1>Anna Bryliant</h1>
+    <p class="font-subtitle" style="font-size: 1.5rem; color: var(--text-color); opacity: 0.8; margin-bottom: 3rem;" data-i18n="hero_slogan">
+      Design with meaning and intention.
+    </p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <button onclick="scrollToId('gallery')" class="btn btn-primary" data-i18n="btn_work">View Works</button>
+      <button onclick="scrollToId('contact')" class="btn btn-outline" data-i18n="btn_contact">Get in Touch</button>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="section-padding reveal">
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_about">About</p>
+      <h2 style="font-size: 3rem; margin-bottom: 2rem;" data-i18n="about_title">Minimalist & Storyteller</h2>
+      <div style="font-size: 1.15rem; color: var(--text-color); opacity: 0.8; line-height: 1.8; white-space: pre-line;" data-i18n="about_text">
+        I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design. 
+        
+        My work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.
+      </div>
+      <div style="margin-top: 2rem; display: flex; align-items: center; gap: 0.5rem; opacity: 0.6;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="font-label" data-i18n="location">Warsaw, Poland</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section-padding reveal" style="background: rgba(0,0,0,0.02);">
+  <div class="container">
+    <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_skills">Expertise</p>
+    <h2 style="font-size: 3rem; margin-bottom: 4rem;" data-i18n="skills_title">What I Do</h2>
+    
+    <div class="contact-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+      <div class="glass-card">
+        <h3 class="font-label" style="font-size: 1rem; margin-bottom: 1rem;" data-i18n="skill_1_title">Branding & Identity</h3>
+        <p style="font-size: 0.95rem; opacity: 0.7;" data-i18n="skill_1_desc">Logo design, brand guidelines, color systems, iconography.</p>
+      </div>
+      <div class="glass-card">
+        <h3 class="font-label" style="font-size: 1rem; margin-bottom: 1rem;" data-i18n="skill_2_title">Packaging</h3>
+        <p style="font-size: 0.95rem; opacity: 0.7;" data-i18n="skill_2_desc">Print-ready files, CMYK/RGB, bleeds & margins.</p>
+      </div>
+      <div class="glass-card">
+        <h3 class="font-label" style="font-size: 1rem; margin-bottom: 1rem;" data-i18n="skill_3_title">Visual Storytelling</h3>
+        <p style="font-size: 0.95rem; opacity: 0.7;" data-i18n="skill_3_desc">Information hierarchy, visual flow, data visualization basics.</p>
+      </div>
+      <div class="glass-card">
+        <h3 class="font-label" style="font-size: 1rem; margin-bottom: 1rem;" data-i18n="skill_4_title">Tools</h3>
+        <p style="font-size: 0.95rem; opacity: 0.7;">Adobe Illustrator, Photoshop, InDesign, Figma, Canva.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="section-padding reveal" style="text-align: center; overflow: hidden;">
+  <div class="container">
+    <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_gallery">Portfolio</p>
+    <h2 style="font-size: 3rem; margin-bottom: 2rem;" data-i18n="gallery_title">Selected Works</h2>
+    
+    <div class="gallery-container">
+      <div class="gallery-item" onclick="setSlide(0)"><img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80" alt="Work"></div>
+      <div class="gallery-item" onclick="setSlide(1)"><img src="https://images.unsplash.com/photo-1541462608143-0afed161667d?auto=format&fit=crop&w=800&q=80" alt="Work"></div>
+      <div class="gallery-item" onclick="setSlide(2)"><img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?auto=format&fit=crop&w=800&q=80" alt="Work"></div>
+      <div class="gallery-item" onclick="setSlide(3)"><img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80" alt="Work"></div>
+      <div class="gallery-item" onclick="setSlide(4)"><img src="https://images.unsplash.com/photo-1507646227500-4d38930012be?auto=format&fit=crop&w=800&q=80" alt="Work"></div>
+    </div>
+    <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; font-style:italic;" data-i18n="gallery_hint">Click images to explore</p>
+  </div>
+</section>
+
+<section id="contact" class="section-padding reveal">
+  <div class="container" style="max-width: 800px;">
+    <div style="text-align: center;">
+      <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_contact">Contact</p>
+      <h2 style="font-size: 3rem; margin-bottom: 3rem;" data-i18n="contact_title">Let's Create Together</h2>
+    </div>
+
+    <div class="contact-grid">
+      <a href="mailto:bryliantanna@gmail.com" class="contact-item">
+        <div class="contact-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <div class="font-label" style="font-size:0.65rem; opacity:0.6;">Email</div>
+          <div style="font-size:0.9rem;">bryliantanna@gmail.com</div>
+        </div>
+      </a>
+
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <div class="contact-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <div class="font-label" style="font-size:0.65rem; opacity:0.6;">LinkedIn</div>
+          <div style="font-size:0.9rem;">Anna Bryliant</div>
+        </div>
+      </a>
+
+      <a href="https://instagram.com/anna_brilliantdesign" target="_blank" class="contact-item">
+        <div class="contact-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <div class="font-label" style="font-size:0.65rem; opacity:0.6;">Instagram</div>
+          <div style="font-size:0.9rem;">@anna_brilliantdesign</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/12397377109" target="_blank" class="contact-item">
+        <div class="contact-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div>
+          <div class="font-label" style="font-size:0.65rem; opacity:0.6;">WhatsApp</div>
+          <div style="font-size:0.9rem;">+1 (239) 737-7109</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; opacity: 0.5;">
+  <p class="font-label" style="font-size: 0.7rem;">© 2026 Anna Bryliant. All rights reserved.</p>
+</footer>
+
+<script>
+  // --- Translations ---
+  const translations = {
+    en: {
+      nav_about: "About", nav_skills: "Skills", nav_gallery: "Gallery", nav_contact: "Contact",
+      section_about: "About", section_skills: "Expertise", section_gallery: "Portfolio", section_contact: "Contact",
+      hero_role: "Graphic Designer & Visual Storyteller",
+      hero_slogan: "Design with meaning and intention.",
+      btn_work: "View Works", btn_contact: "Get in Touch",
+      about_title: "Minimalist & Storyteller",
+      about_text: "I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design.\n\nMy work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.\n\nMy creative journey began as an acrylic painter in Ukraine, a practice I still return to as a form of creative therapy. This artistic background shapes my ability to balance emotion with strategy and structure.",
+      location: "Warsaw, Poland",
+      skills_title: "What I Do",
+      skill_1_title: "Branding & Identity", skill_1_desc: "Logo design, brand guidelines, color systems, iconography.",
+      skill_2_title: "Packaging", skill_2_desc: "Print-ready files, CMYK/RGB, bleeds & margins, sustainable solutions.",
+      skill_3_title: "Visual Storytelling", skill_3_desc: "Information hierarchy, visual flow, data visualization basics.",
+      skill_4_title: "Tools",
+      gallery_title: "Selected Works", gallery_hint: "Click images to explore",
+      contact_title: "Let's Create Together"
+    },
+    pl: {
+      nav_about: "O mnie", nav_skills: "Umiejętności", nav_gallery: "Galeria", nav_contact: "Kontakt",
+      section_about: "O mnie", section_skills: "Umiejętności", section_gallery: "Galeria", section_contact: "Kontakt",
+      hero_role: "Projektantka Graficzna",
+      hero_slogan: "Projektowanie ze znaczeniem i intencją.",
+      btn_work: "Moje Prace", btn_contact: "Skontaktuj się",
+      about_title: "Minimalizm i Opowieść",
+      about_text: "Jestem projektantką graficzną i specjalistką od visual storytellingu, specjalizującą się w pomaganiu startupom i małym firmom w rozwoju poprzez strategiczny, celowy design.\n\nW swojej pracy łączę estetykę wizualną, psychologię i marketing, tworząc identyfikacje wizualne oraz rozwiązania, które jasno komunikują wartości marki i są gotowe na skalowanie.\n\nMoja kreatywna droga rozpoczęła się od malarstwa akrylowego na Ukrainie — praktyki, do której nadal wracam jako formy terapii twórczej.",
+      location: "Warszawa, Polska",
+      skills_title: "Co robię",
+      skill_1_title: "Branding", skill_1_desc: "Projektowanie logo, księgi znaku, systemy kolorystyczne.",
+      skill_2_title: "Opakowania", skill_2_desc: "Pliki gotowe do druku, CMYK/RGB, spady i marginesy.",
+      skill_3_title: "Visual Storytelling", skill_3_desc: "Hierarchia informacji, prowadzenie wzroku, wizualizacja danych.",
+      skill_4_title: "Narzędzia",
+      gallery_title: "Wybrane Prace", gallery_hint: "Kliknij obraz, aby przewinąć",
+      contact_title: "Stwórzmy coś razem"
+    }
+  };
+
+  let currentLang = 'en';
+
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'pl' : 'en';
+    document.getElementById('langLabel').textContent = currentLang.toUpperCase();
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.innerText = translations[currentLang][key];
+      }
+    });
+  }
+
+  // --- Theme Toggle ---
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('light');
+    
+    const icon = document.getElementById('themeIcon');
+    const isDark = document.body.classList.contains('dark');
+    
+    // Switch Icon: Sun if Dark (to switch to light), Moon if Light (to switch to dark)
+    if (isDark) {
+      icon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>';
+    } else {
+      icon.innerHTML = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
+    }
+  }
+
+  // --- Smooth Scroll ---
+  function scrollToId(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // --- INFINITE 3D GALLERY LOGIC ---
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  let activeIndex = 2; // Start in middle
+
+  function updateGallery() {
+    const len = galleryItems.length;
+    
+    galleryItems.forEach((item, index) => {
+      item.className = 'gallery-item'; // Reset classes
+      
+      // Calculate distances for circular logic
+      if (index === activeIndex) {
+        item.classList.add('active');
+      } 
+      // Next Item (Circular)
+      else if (index === (activeIndex + 1) % len) {
+        item.classList.add('next');
+      } 
+      // Previous Item (Circular)
+      else if (index === (activeIndex - 1 + len) % len) {
+        item.classList.add('prev');
+      } 
+      // Others hidden
+      else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  function setSlide(index) {
+    activeIndex = index;
+    updateGallery();
+  }
+
+  // Auto rotate slowly (optional, good for showcasing infinite loop)
+  // setInterval(() => setSlide((activeIndex + 1) % galleryItems.length), 3000);
+
+  updateGallery(); // Initial call
+
+  // --- Scroll Reveal ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+</script>
+</body>
+</html>
