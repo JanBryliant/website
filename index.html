@@ -11,151 +11,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Arapey:ital@1&family=Lato:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html, body { height: 100%; margin: 0; }
-    :root {
-      --bg-color: #1E2749;
-      --text-color: #FAFAFA;
-      --primary: #E6DFFF;
-      --secondary: #273469;
-      --accent: #FAFAFA;
-      --border: rgba(250, 250, 250, 0.15);
-      --glass: rgba(30, 39, 73, 0.75);
-      --card-bg: rgba(39, 52, 105, 0.4);
-      --radius: 0.75rem;
-    }
-    body.light {
-      --bg-color: #FAFAFA;
-      --text-color: #2E3440;
-      --primary: #273469;
-      --secondary: #E6DFFF;
-      --accent: #1E2749;
-      --border: rgba(46, 52, 64, 0.1);
-      --glass: rgba(250, 250, 250, 0.9);
-      --card-bg: rgba(255, 255, 255, 0.5);
-    }
-    body {
-      font-family: 'Nanum Myeongjo', serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
+    :root { --bg-color: #1E2749; --text-color: #FAFAFA; --primary: #E6DFFF; --secondary: #273469; --border: rgba(250,250,250,0.15); --glass: rgba(30,39,73,0.75); --card-bg: rgba(39,52,105,0.4); }
+    body.light { --bg-color: #FAFAFA; --text-color: #2E3440; --primary: #273469; --secondary: #E6DFFF; --border: rgba(46,52,64,0.1); --glass: rgba(250,250,250,0.9); --card-bg: rgba(255,255,255,0.5); }
+    body { font-family: 'Nanum Myeongjo', serif; background-color: var(--bg-color); color: var(--text-color); }
     h1, h2, h3 { font-family: 'Italiana', serif; }
     .logo, .font-subtitle { font-family: 'Arapey', serif; font-style: italic; }
-    .font-label, button, .nav-links button, .btn {
-      font-family: 'Lato', sans-serif;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-    }
+    .font-label, button, .nav-links button, .btn { font-family: 'Lato', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.15em; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
     .section-padding { padding: 8rem 0; }
     .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      height: 80px; display: flex; align-items: center;
-      background: var(--glass); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border); transition: all 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 80px; display: flex; align-items: center; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    .logo {
-      font-size: 1.5rem; cursor: pointer; color: var(--text-color); text-decoration: none; flex-shrink: 0;
-    }
-    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .nav-links.desktop { display: flex; gap: 2rem; align-items: center; margin-right: 1rem; }
-    .nav-links button.nav-item {
-      background: none; border: none; cursor: pointer;
-      color: var(--text-color); opacity: 0.7; transition: 0.3s;
-    }
+    .logo { font-size: 1.5rem; cursor: pointer; color: var(--text-color); text-decoration: none; }
+    .nav-right, .nav-links.desktop, .nav-controls { display: flex; align-items: center; }
+    .nav-right { gap: 0.75rem; }
+    .nav-links.desktop { gap: 2rem; margin-right: 1rem; }
+    .nav-links button.nav-item { background: none; border: none; cursor: pointer; color: var(--text-color); opacity: 0.7; transition: 0.3s; }
     .nav-links button.nav-item:hover { opacity: 1; }
-    .nav-controls { display: flex; gap: 0.5rem; align-items: center; }
-    .toggle-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 12px; background-color: var(--secondary); border: none;
-      border-radius: 12px; color: var(--text-color); cursor: pointer;
-      font-size: 0.75rem; letter-spacing: 0.12em; transition: all 0.3s ease;
-    }
+    .nav-controls { gap: 0.5rem; }
+    .toggle-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background-color: var(--secondary); border: none; border-radius: 12px; color: var(--text-color); cursor: pointer; font-size: 0.75rem; letter-spacing: 0.12em; transition: 0.3s; }
     .toggle-btn:hover { background-color: #E6DFFF; color: #1E2749; transform: translateY(-1px); }
     .toggle-btn svg { width: 16px; height: 16px; stroke: currentColor; }
     .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
-    .hero {
-      height: 100vh; position: relative; display: flex; align-items: center; justify-content: center;
-      text-align: center; overflow: hidden; background-color: var(--bg-color);
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background-image: url('https://i.imgur.com/a8ZYWLG.png');
-      background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0;
-    }
-    .hero-overlay { position: absolute; inset: 0; background-color: var(--bg-color); opacity: 0.7; z-index: 1; }
+    .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://i.imgur.com/a8ZYWLG.png'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background-color: var(--bg-color); opacity: 0.7; }
     .hero h1 { font-size: clamp(3.5rem, 10vw, 8rem); line-height: 1; margin-bottom: 1.5rem; color: var(--primary); position: relative; z-index: 2; }
-    .btn {
-      padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none;
-      font-weight: 700; font-size: 0.9rem; transition: 0.3s; cursor: pointer; display: inline-block; border: 1px solid transparent;
-    }
+    .btn { padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.3s; cursor: pointer; display: inline-block; border: 1px solid transparent; }
     .btn-primary { background: var(--primary); color: var(--bg-color); }
     .btn-outline { background: transparent; color: var(--text-color); border-color: var(--text-color); }
     .btn:hover { transform: translateY(-2px); opacity: 0.9; }
-    .glass-card {
-      background: var(--card-bg); border: 1px solid var(--border); padding: 2rem;
-      border-radius: var(--radius); backdrop-filter: blur(10px); transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--primary); }
+    .glass-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 0.75rem; backdrop-filter: blur(10px); transition: 0.3s; }
+    .glass-card:hover { transform: translateY(-5px); border-color: var(--primary); }
     .gallery-section { margin: 6rem 0; }
-    .gallery-section h3 {
-      font-size: 2.4rem; margin-bottom: 2.5rem; color: var(--primary); text-align: center;
-    }
-    .gallery-container {
-      position: relative; height: 520px; display: flex; justify-content: center; align-items: center;
-      perspective: 1100px; margin: 0 auto; max-width: 100%; touch-action: pan-y;
-    }
-    .gallery-item {
-      position: absolute; width: 320px; height: 450px; border-radius: 16px; overflow: hidden;
-      transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
-      cursor: pointer; user-select: none;
-    }
+    .gallery-section h3 { font-size: 2.4rem; margin-bottom: 2.5rem; color: var(--primary); text-align: center; }
+    .gallery-container { position: relative; height: 520px; display: flex; justify-content: center; align-items: center; perspective: 1100px; touch-action: pan-y; }
+    .gallery-item { position: absolute; width: 320px; height: 450px; border-radius: 16px; overflow: hidden; transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); cursor: pointer; user-select: none; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    .gallery-item.active { transform: translateZ(120px) scale(1.04); z-index: 10; opacity: 1; }
+    .gallery-item.active { transform: translateZ(120px) scale(1.04); z-index: 10; }
     .gallery-item.prev { transform: translateX(-280px) scale(0.84) rotateY(16deg); z-index: 5; opacity: 0.72; filter: brightness(0.78); }
     .gallery-item.next { transform: translateX(280px) scale(0.84) rotateY(-16deg); z-index: 5; opacity: 0.72; filter: brightness(0.78); }
     .gallery-item.hidden { opacity: 0; transform: scale(0.6); pointer-events: none; z-index: -1; }
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-    .contact-item {
-      display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-color);
-      padding: 1.5rem; border: 1px solid var(--border); border-radius: 1rem; transition: 0.3s;
-    }
+    .contact-item { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-color); padding: 1.5rem; border: 1px solid var(--border); border-radius: 1rem; transition: 0.3s; }
     .contact-item:hover { background: var(--secondary); border-color: var(--secondary); }
-    #mobileMenu {
-      position: fixed; inset: 0; background: var(--bg-color); z-index: 999;
-      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-      transform: translateY(-100%); transition: transform 0.4s ease;
-    }
+    #mobileMenu { position: fixed; inset: 0; background: var(--bg-color); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transform: translateY(-100%); transition: 0.4s ease; }
     #mobileMenu.open { transform: translateY(0); }
-    .lightbox {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 9999;
-      align-items: center; justify-content: center; backdrop-filter: blur(10px);
-    }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
     .lightbox.active { display: flex; }
-    .lightbox-content {
-      max-width: 94vw; max-height: 94vh; object-fit: contain;
-      border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-    }
-    .lightbox-close {
-      position: absolute; top: 25px; right: 35px; font-size: 4.8rem;
-      color: #fff; opacity: 0.75; cursor: pointer; line-height: 1;
-    }
-    .lightbox-close:hover { opacity: 1; transform: scale(1.2); }
+    .lightbox-content { max-width: 94vw; max-height: 94vh; object-fit: contain; border-radius: 12px; }
+    .lightbox-close { position: absolute; top: 25px; right: 35px; font-size: 4.8rem; color: #fff; opacity: 0.75; cursor: pointer; line-height: 1; }
     @media (max-width: 768px) {
       .nav-links.desktop { display: none; }
       .mobile-toggle { display: block; }
-      .nav-right { gap: 0.5rem; }
-      .toggle-btn span { font-size: 0.7rem; }
       .gallery-container { height: 420px; }
       .gallery-item { width: 260px; height: 360px; }
-      .gallery-item.prev { transform: translateX(-140px) scale(0.84) rotateY(10deg); opacity: 0.6; }
-      .gallery-item.next { transform: translateX(140px) scale(0.84) rotateY(-10deg); opacity: 0.6; }
+      .gallery-item.prev { transform: translateX(-140px) scale(0.84) rotateY(10deg); }
+      .gallery-item.next { transform: translateX(140px) scale(0.84) rotateY(-10deg); }
       .hero h1 { font-size: 3.5rem; }
       .lightbox-close { top: 15px; right: 20px; font-size: 3.5rem; }
     }
-    @media (min-width: 769px) { .mobile-toggle { display: none; } }
   </style>
 </head>
 <body class="dark">
@@ -168,16 +84,12 @@
         <button onclick="scrollToId('about')" class="nav-item" data-i18n="nav_about">About</button>
         <button onclick="scrollToId('skills')" class="nav-item" data-i18n="nav_skills">Skills</button>
         <button onclick="scrollToId('gallery')" class="nav-item" data-i18n="nav_gallery">Gallery</button>
+        <button onclick="scrollToId('certificates')" class="nav-item" data-i18n="nav_certs">Recognition</button>
         <button onclick="scrollToId('contact')" class="nav-item" data-i18n="nav_contact">Contact</button>
       </div>
       <div class="nav-controls">
-        <button onclick="toggleLang()" class="toggle-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"></path></svg>
-          <span id="langLabel">EN</span>
-        </button>
-        <button onclick="toggleTheme()" class="toggle-btn">
-          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-        </button>
+        <button onclick="toggleLang()" class="toggle-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"></path></svg><span id="langLabel">EN</span></button>
+        <button onclick="toggleTheme()" class="toggle-btn"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg></button>
       </div>
       <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
     </div>
@@ -188,6 +100,7 @@
   <button onclick="scrollToId('about'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_about">About</button>
   <button onclick="scrollToId('skills'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_skills">Skills</button>
   <button onclick="scrollToId('gallery'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_gallery">Gallery</button>
+  <button onclick="scrollToId('certificates'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_certs">Recognition</button>
   <button onclick="scrollToId('contact'); toggleMobileMenu()" class="font-label" style="font-size:1.5rem; background:none; border:none; color:var(--text-color);" data-i18n="nav_contact">Contact</button>
   <button onclick="toggleMobileMenu()" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:2rem; color:var(--text-color);">✕</button>
 </div>
@@ -211,11 +124,9 @@
     <div style="max-width: 800px; margin: 0 auto;">
       <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_about">About</p>
       <h2 style="font-size: 3rem; margin-bottom: 2rem;" data-i18n="about_title">Minimalist & Storyteller</h2>
-      <div style="font-size: 1.15rem; color: var(--text-color); opacity: 0.8; line-height: 1.8; white-space: pre-line;" data-i18n="about_text">
-        I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design.
+      <div style="font-size: 1.15rem; color: var(--text-color); opacity: 0.8; line-height: 1.8; white-space: pre-line;" data-i18n="about_text">I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design.
       
-        My work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.
-      </div>
+      My work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.</div>
       <div style="margin-top: 2rem; display: flex; align-items: center; gap: 0.5rem; opacity: 0.6;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
         <span class="font-label" data-i18n="location">Warsaw, Poland</span>
@@ -280,7 +191,6 @@
       <h3>Brand Identity Project</h3>
       <div class="gallery-container">
         <div class="gallery-item"><img src="images/4.2.png" alt="Brand 4.2"></div>
-        <div class="gallery-item"><img src="images/4.4.jpg" alt="Brand 4.4"></div>
         <div class="gallery-item"><img src="images/4.5.jpg" alt="Brand 4.5"></div>
         <div class="gallery-item"><img src="images/4.6.jpg" alt="Brand 4.6"></div>
         <div class="gallery-item"><img src="images/4.7.jpg" alt="Brand 4.7"></div>
@@ -294,16 +204,57 @@
     <div class="gallery-section">
       <h3>Packaging & Select Projects</h3>
       <div class="gallery-container">
-        <div class="gallery-item"><img src="images/6.jpg" alt="Project 6"></div>
         <div class="gallery-item"><img src="images/7.1.jpg" alt="Illustration 7.1"></div>
         <div class="gallery-item"><img src="images/7.2.jpg" alt="Illustration 7.2"></div>
         <div class="gallery-item"><img src="images/8.jpg" alt="Editorial 8"></div>
       </div>
     </div>
+    <p style="margin-top:3rem; opacity:0.6; font-size:0.95rem; font-style:italic;" data-i18n="gallery_hint">Click center image to enlarge • Swipe or click sides to navigate</p>
+  </div>
+</section>
 
-    <p style="margin-top:3rem; opacity:0.6; font-size:0.95rem; font-style:italic;" data-i18n="gallery_hint">
-      Click center image to enlarge • Swipe or click sides to navigate
-    </p>
+<section id="certificates" class="section-padding reveal" style="background: rgba(0,0,0,0.02);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_certs">Recognition</p>
+      <h2 style="font-size: 3rem;" data-i18n="certs_title">Education & Certificates</h2>
+    </div>
+
+    <div class="contact-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+      
+      <div class="glass-card" style="padding: 10px; cursor: pointer;" onclick="openCertsLightbox('dyplom/Diplom.jpg')">
+        <img src="dyplom/Diplom.jpg" alt="High School Diploma" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+        <div style="padding: 10px;">
+          <h3 class="font-label" style="font-size: 0.8rem; margin-bottom: 5px;">High School Diploma</h3>
+          <p style="font-size: 0.75rem; opacity: 0.6;">Department of Education, Florida</p>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding: 10px; cursor: pointer;" onclick="openCertsLightbox('dyplom/LCIEducation 120 (2).jpg')">
+        <img src="dyplom/LCIEducation 120 (2).jpg" alt="Graphic Design Essentials" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+        <div style="padding: 10px;">
+          <h3 class="font-label" style="font-size: 0.8rem; margin-bottom: 5px;">Graphic Design Essentials</h3>
+          <p style="font-size: 0.75rem; opacity: 0.6;">LCI Education / edX Verified</p>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding: 10px; cursor: pointer;" onclick="openCertsLightbox('dyplom/creo-certificate-eng.jpg')">
+        <img src="dyplom/creo-certificate-eng.jpg" alt="Freelancer Graphic Designer" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+        <div style="padding: 10px;">
+          <h3 class="font-label" style="font-size: 0.8rem; margin-bottom: 5px;">Freelancer Graphic Designer</h3>
+          <p style="font-size: 0.75rem; opacity: 0.6;">CREO Online School</p>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding: 10px; cursor: pointer;" onclick="openCertsLightbox('dyplom/Certificate of Recognition.jpg')">
+        <img src="dyplom/Certificate of Recognition.jpg" alt="English Proficiency" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+        <div style="padding: 10px;">
+          <h3 class="font-label" style="font-size: 0.8rem; margin-bottom: 5px;">English Proficiency</h3>
+          <p style="font-size: 0.75rem; opacity: 0.6;">Adult & Career Education</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -311,23 +262,30 @@
   <div class="container" style="max-width: 800px;">
     <div style="text-align: center;">
       <p class="font-label" style="color: var(--primary); margin-bottom: 1rem;" data-i18n="section_contact">Contact</p>
-      <h2 style="font-size: 3rem; margin-bottom: 3rem;" data-i18n="contact_title">Let's Create Together</h2>
+      <h2 style="font-size: 3rem; margin-bottom: 2rem;" data-i18n="contact_title">Let's Create Together</h2>
     </div>
+
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <a id="resumeLink" href="Anna_Bryliant_resume_2026_english.pdf" target="_blank" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span id="resumeBtnText" data-i18n="btn_resume">Download CV (EN)</span>
+      </a>
+      <div style="margin-top: 10px;">
+        <a id="altResumeLink" href="Anna_Bryliant_resume_2026_polish.pdf" target="_blank" style="font-size: 0.8rem; opacity: 0.6; color: var(--text-color); text-decoration: underline;" data-i18n="link_alt_resume">Download Polish version</a>
+      </div>
+    </div>
+
     <div class="contact-grid">
       <a href="mailto:bryliantanna@gmail.com" class="contact-item">
-        <div class="contact-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
         <div><div class="font-label" style="font-size:0.65rem; opacity:0.6;">Email</div><div style="font-size:0.9rem;">bryliantanna@gmail.com</div></div>
       </a>
       <a href="https://linkedin.com" target="_blank" class="contact-item">
-        <div class="contact-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
         <div><div class="font-label" style="font-size:0.65rem; opacity:0.6;">LinkedIn</div><div style="font-size:0.9rem;">Anna Bryliant</div></div>
       </a>
       <a href="https://instagram.com/anna_brilliantdesign" target="_blank" class="contact-item">
-        <div class="contact-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
         <div><div class="font-label" style="font-size:0.65rem; opacity:0.6;">Instagram</div><div style="font-size:0.9rem;">@anna_brilliantdesign</div></div>
       </a>
       <a href="https://wa.me/12397377109" target="_blank" class="contact-item">
-        <div class="contact-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
         <div><div class="font-label" style="font-size:0.65rem; opacity:0.6;">WhatsApp</div><div style="font-size:0.9rem;">+1 (239) 737-7109</div></div>
       </a>
     </div>
@@ -345,40 +303,8 @@
 
 <script>
   const translations = {
-    en: {
-      nav_about: "About", nav_skills: "Skills", nav_gallery: "Gallery", nav_contact: "Contact",
-      section_about: "About", section_skills: "Expertise", section_gallery: "Portfolio", section_contact: "Contact",
-      hero_role: "Graphic Designer & Visual Storyteller",
-      hero_slogan: "Design with meaning and intention.",
-      btn_work: "View Works", btn_contact: "Get in Touch",
-      about_title: "Minimalist & Storyteller",
-      about_text: "I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design.\n\nMy work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.\n\nMy creative journey began as an acrylic painter in Ukraine, a practice I still return to as a form of creative therapy. This artistic background shapes my ability to balance emotion with strategy and structure.",
-      location: "Warsaw, Poland",
-      skills_title: "What I Do",
-      skill_1_title: "Branding & Identity", skill_1_desc: "Logo design, brand guidelines, color systems, iconography.",
-      skill_2_title: "Packaging", skill_2_desc: "Print-ready files, CMYK/RGB, bleeds & margins, sustainable solutions.",
-      skill_3_title: "Visual Storytelling", skill_3_desc: "Information hierarchy, visual flow, data visualization basics.",
-      skill_4_title: "Tools",
-      gallery_title: "Selected Works", gallery_hint: "Click or swipe to explore",
-      contact_title: "Let's Create Together"
-    },
-    pl: {
-      nav_about: "O mnie", nav_skills: "Umiejętności", nav_gallery: "Galeria", nav_contact: "Kontakt",
-      section_about: "O mnie", section_skills: "Umiejętności", section_gallery: "Galeria", section_contact: "Kontakt",
-      hero_role: "Projektantka Graficzna",
-      hero_slogan: "Projektowanie ze znaczeniem i intencją.",
-      btn_work: "Moje Prace", btn_contact: "Skontaktuj się",
-      about_title: "Minimalizm i Opowieść",
-      about_text: "Jestem projektantką graficzną i specjalistką od visual storytellingu, specjalizującą się w pomaganiu startupom i małym firmom w rozwoju poprzez strategiczny, celowy design.\n\nW swojej pracy łączę estetykę wizualną, psychologię i marketing, tworząc identyfikacje wizualne oraz rozwiązania, które jasno komunikują wartości marki i są gotowe na skalowanie.\n\nMoja kreatywna droga rozpoczęła się od malarstwa akrylowego na Ukrainie — praktyki, do której nadal wracam jako formy terapii twórczej.",
-      location: "Warszawa, Polska",
-      skills_title: "Co robię",
-      skill_1_title: "Branding", skill_1_desc: "Projektowanie logo, księgi znaku, systemy kolorystyczne.",
-      skill_2_title: "Opakowania", skill_2_desc: "Pliki gotowe do druku, CMYK/RGB, spady i marginesy.",
-      skill_3_title: "Visual Storytelling", skill_3_desc: "Hierarchia informacji, prowadzenie wzroku, wizualizacja danych.",
-      skill_4_title: "Narzędzia",
-      gallery_title: "Wybrane Prace", gallery_hint: "Kliknij lub przesuń, aby przeglądać",
-      contact_title: "Stwórzmy coś razem"
-    }
+    en: { nav_about: "About", nav_skills: "Skills", nav_gallery: "Gallery", nav_certs: "Recognition", nav_contact: "Contact", section_about: "About", section_skills: "Expertise", section_gallery: "Portfolio", section_certs: "Recognition", section_contact: "Contact", hero_role: "Graphic Designer & Visual Storyteller", hero_slogan: "Design with meaning and intention.", btn_work: "View Works", btn_contact: "Get in Touch", about_title: "Minimalist & Storyteller", about_text: "I am a Graphic Designer and Visual Storytelling professional specializing in helping startups and small businesses grow through strategic, purpose-driven design.\n\nMy work blends visual aesthetics, psychology, and marketing to create brand identities and visuals that communicate clearly and scale effectively.", location: "Warsaw, Poland", skills_title: "What I Do", skill_1_title: "Branding & Identity", skill_1_desc: "Logo design, brand guidelines, color systems, iconography.", skill_2_title: "Packaging", skill_2_desc: "Print-ready files, CMYK/RGB, bleeds & margins.", skill_3_title: "Visual Storytelling", skill_3_desc: "Information hierarchy, visual flow, data visualization basics.", gallery_title: "Selected Works", gallery_hint: "Click center image to enlarge • Swipe or click sides to navigate", certs_title: "Education & Certificates", contact_title: "Let's Create Together", btn_resume: "Download CV (EN)", link_alt_resume: "Download Polish version" },
+    pl: { nav_about: "O mnie", nav_skills: "Umiejętności", nav_gallery: "Galeria", nav_certs: "Osiągnięcia", nav_contact: "Kontakt", section_about: "O mnie", section_skills: "Umiejętności", section_gallery: "Galeria", section_certs: "Osiągnięcia", section_contact: "Kontakt", hero_role: "Projektantka Graficzna", hero_slogan: "Projektowanie ze znaczeniem и intencją.", btn_work: "Moje Prace", btn_contact: "Skontaktuj się", about_title: "Minimalizm и Opowieść", about_text: "Jestem projektantką graficzną и specjalistką od visual storytellingu, specjalizującą się в pomaganiu startupom и małym firmom в rozwoju poprzez strategiczny, celowy design.\n\nW своей pracy łączę estetykę wizualną, psychologię и marketing, tworząc identyfikacje wizualне oraz rozwiązania, которые jasno komunikują wartości marki и są gotowe на skalowanie.", location: "Warszawa, Polska", skills_title: "Co robię", skill_1_title: "Branding", skill_1_desc: "Projektowanie logo, księgi znaku, systemy kolorystyczne.", skill_2_title: "Opakowania", skill_2_desc: "Pliki gotвые к druku, CMYK/RGB, spady и marginesy.", skill_3_title: "Visual Storytelling", skill_3_desc: "Hierarchia informacji, prowadzenie wzroku, wizualizacja данных.", gallery_title: "Wybrane Prace", gallery_hint: "Kliknij lub przesuń, aby przeglądać", certs_title: "Edukacja и Certyfikaty", contact_title: "Stwórzмы coś razem", btn_resume: "Pobierz CV (PL)", link_alt_resume: "Pobierz wersję angielską" }
   };
 
   let currentLang = 'en';
@@ -387,92 +313,87 @@
     currentLang = currentLang === 'en' ? 'pl' : 'en';
     document.getElementById('langLabel').textContent = currentLang.toUpperCase();
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+      const k = el.getAttribute('data-i18n');
+      if (translations[currentLang][k]) el.textContent = translations[currentLang][k];
     });
+
+    const m = document.getElementById('resumeLink'), a = document.getElementById('altResumeLink');
+    m.href = currentLang === 'en' ? "Anna_Bryliant_resume_2026_english.pdf" : "Anna_Bryliant_resume_2026_polish.pdf";
+    a.href = currentLang === 'en' ? "Anna_Bryliant_resume_2026_polish.pdf" : "Anna_Bryliant_resume_2026_english.pdf";
   }
 
   function toggleTheme() {
-    document.body.classList.toggle('dark');
-    document.body.classList.toggle('light');
-    const icon = document.getElementById('themeIcon');
+    document.body.classList.toggle('dark'); document.body.classList.toggle('light');
     const isDark = document.body.classList.contains('dark');
-    icon.innerHTML = isDark
+    document.getElementById('themeIcon').innerHTML = isDark
       ? '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">'
       : '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
   }
 
-  function scrollToId(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  }
+  function scrollToId(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+  function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
 
-  function toggleMobileMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  // Gallery logic
+  // Gallery
   document.querySelectorAll('.gallery-container').forEach(container => {
     const items = container.querySelectorAll('.gallery-item');
     if (items.length < 2) return;
-
     let activeIndex = Math.floor(items.length / 2);
 
-    function updateGallery() {
+    function update() {
       items.forEach((item, i) => {
         item.className = 'gallery-item';
         const diff = i - activeIndex;
-        if      (diff === 0)                           item.classList.add('active');
+        if (diff === 0) item.classList.add('active');
         else if (diff === 1 || diff === -items.length + 1) item.classList.add('next');
         else if (diff === -1 || diff === items.length - 1) item.classList.add('prev');
-        else                                           item.classList.add('hidden');
+        else item.classList.add('hidden');
       });
     }
 
-    function moveTo(index) {
-      activeIndex = (index + items.length) % items.length;
-      updateGallery();
-    }
+    function moveTo(idx) { activeIndex = (idx + items.length) % items.length; update(); }
 
-    // Click logic: center → lightbox, sides → slide
     items.forEach((item, idx) => {
       item.addEventListener('click', () => {
         if (item.classList.contains('active')) {
           const img = item.querySelector('img');
           if (img) {
             document.getElementById('lightbox-img').src = img.src;
-            document.getElementById('lightbox-img').alt = img.alt;
             document.getElementById('lightbox').classList.add('active');
+            history.pushState({ lightbox: true }, ''); // Симуляция перехода в истории браузера
           }
-        } else {
-          moveTo(idx);
-        }
+        } else moveTo(idx);
       });
     });
 
-    // Swipe
     let startX = 0;
     container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     container.addEventListener('touchend', e => {
       const diff = startX - (e.changedTouches?.[0]?.clientX ?? startX);
       if (Math.abs(diff) > 50) moveTo(activeIndex + (diff > 0 ? 1 : -1));
     }, { passive: true });
-
-    updateGallery();
+    update();
   });
 
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  function closeLightbox() { lightbox.classList.remove('active'); }
+  // Lightbox & Popstate
+  const lb = document.getElementById('lightbox');
+  function closeLB() { lb.classList.remove('active'); }
 
-  document.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
-  lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  document.querySelector('.lightbox-close')?.addEventListener('click', () => { closeLB(); history.back(); });
+  lb?.addEventListener('click', e => { if (e.target === lb) { closeLB(); history.back(); } });
+
+  // Функция для открытия дипломов в лайтбоксе
+  function openCertsLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    history.pushState({ lightbox: true }, '');
+  }
+
+  // Если нажата кнопка "Назад" в браузере
+  window.addEventListener('popstate', e => { if (!e.state || !e.state.lightbox) closeLB(); });
 
   // Reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver(ents => { ents.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
